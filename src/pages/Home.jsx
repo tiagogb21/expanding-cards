@@ -24,6 +24,21 @@ function Home() {
 
   const teste = (id) => (id === targetId ? 'active' : '');
 
+  useEffect(() => {
+    const panels = document.querySelectorAll('.panel');
+    function removeActiveClasses() {
+      panels.forEach((panel) => {
+        panel.classList.remove('active');
+      });
+    }
+    panels.forEach((panel) => {
+      panel.addEventListener('click', () => {
+        removeActiveClasses();
+        panel.classList.add('active');
+      });
+    });
+  }, [data]);
+
   return (
     <section className="container">
       <section className="search__container">
@@ -42,13 +57,11 @@ function Home() {
       <section className="images__container">
         {data !== undefined &&
           data.length > 0 &&
-          data.map((item, id) => (
-            <div key={item.id} className="panel">
-              <img
-                className={`panel ${teste(id)}`}
-                src={item.urls.full}
-                alt={item.alt_description}
-              />
+          data.slice(0, 5).map((item, id) => (
+            <div
+              className={`panel ${teste(id)}`}
+              style={{ backgroundImage: `url(${item.urls.full})` }}
+            >
               <h3>{item.alt_description}</h3>
             </div>
           ))}
