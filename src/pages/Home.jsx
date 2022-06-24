@@ -60,7 +60,9 @@ function Home() {
           data.slice(0, 5).map((item, id) => (
             <div
               className={`panel ${teste(id)}`}
-              style={{ backgroundImage: `url(${item.urls.full})` }}
+              style={{
+                backgroundImage: `url(${item.urls.full})`,
+              }}
             >
               <h3>{item.alt_description}</h3>
             </div>
